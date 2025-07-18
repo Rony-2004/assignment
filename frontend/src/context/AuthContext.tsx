@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import type { User, AuthContextType } from '../types/index';
 import type { ReactNode } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 
 interface AuthState {
   user: User | null;
@@ -42,7 +43,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = async (email: string, password: string): Promise<boolean> => {
     dispatch({ type: 'SET_LOADING', payload: true });
     try {
-      const res = await axios.post('/api/auth/login', { email, password });
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
       const { token, user } = res.data;
       localStorage.setItem('token', token);
       localStorage.setItem('currentUser', JSON.stringify(user));

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import type { Student, StudentsContextType } from '../types/index';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import { API_BASE_URL } from '../api';
 
 interface StudentsState {
   students: Student[];
@@ -85,7 +86,7 @@ export const StudentsProvider: React.FC<{ children: ReactNode }> = ({ children }
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get('/api/students', {
+        const res = await axios.get(`${API_BASE_URL}/api/students`, {
           headers: { Authorization: `Bearer ${getToken()}` }
         });
         dispatch({ type: 'SET_STUDENTS', payload: res.data });
@@ -97,7 +98,7 @@ export const StudentsProvider: React.FC<{ children: ReactNode }> = ({ children }
   useEffect(() => {
     const fetchCurrent = async () => {
       try {
-        const res = await axios.get('/api/students/me', {
+        const res = await axios.get(`${API_BASE_URL}/api/students/me`, {
           headers: { Authorization: `Bearer ${getToken()}` }
         });
         dispatch({ type: 'SET_CURRENT_STUDENT', payload: res.data });
@@ -110,7 +111,7 @@ export const StudentsProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   const updateStudent = async (id: string, updates: Partial<Student>) => {
     try {
-      const res = await axios.put('/api/students/me', updates, {
+      const res = await axios.put(`${API_BASE_URL}/api/students/me`, updates, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       dispatch({ type: 'UPDATE_STUDENT', payload: { id, updates: res.data } });
@@ -119,7 +120,7 @@ export const StudentsProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   const updateFeeStatus = async (id: string, paid: boolean, paymentDate?: string) => {
     try {
-      const res = await axios.post('/api/students/me/pay', {}, {
+      const res = await axios.post(`${API_BASE_URL}/api/students/me/pay`, {}, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       dispatch({ type: 'UPDATE_FEE_STATUS', payload: { id, paid: res.data.feesPaid, paymentDate: res.data.paymentDate } });

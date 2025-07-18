@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { GraduationCap, Eye, EyeOff } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { API_BASE_URL } from '../api';
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -56,7 +57,7 @@ const Login: React.FC = () => {
     setIsSubmitting(true);
     setError('');
     try {
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(signupData)
