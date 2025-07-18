@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStudents } from '../context/StudentsContext';
-import { useAuth } from '../context/AuthContext';
 import { User, Mail, Edit2, Save, X, CreditCard, CheckCircle, Calendar } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const Profile: React.FC = () => {
   const { currentStudent, updateStudent } = useStudents();
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStudents } from '../context/StudentsContext';
-import { useAuth } from '../context/AuthContext';
 import { CreditCard, Lock, ArrowLeft, CheckCircle, XCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const Payment: React.FC = () => {
   const { currentStudent, updateFeeStatus } = useStudents();
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentResult, setPaymentResult] = useState<'success' | 'failed' | null>(null);
