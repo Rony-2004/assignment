@@ -118,7 +118,7 @@ export const StudentsProvider: React.FC<{ children: ReactNode }> = ({ children }
     } catch {}
   };
 
-  const updateFeeStatus = async (id: string, paid: boolean, paymentDate?: string) => {
+  const updateFeeStatus = async (id: string) => {
     try {
       const res = await axios.post(`${API_BASE_URL}/api/students/me/pay`, {}, {
         headers: { Authorization: `Bearer ${getToken()}` }
