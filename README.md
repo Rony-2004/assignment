@@ -103,6 +103,3 @@ assignment/
 - **Deployment:** Render (backend), Vercel (frontend)
 
 ---
-
-## License
-MIT 
